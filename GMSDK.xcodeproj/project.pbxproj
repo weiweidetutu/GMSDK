@@ -1,0 +1,542 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		561EED93275465A90042705D /* GMSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 561EED89275465A80042705D /* GMSDK.framework */; };
+		561EED98275465A90042705D /* GMSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 561EED97275465A90042705D /* GMSDKTests.m */; };
+		561EED9A275465A90042705D /* GMSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 561EED8C275465A80042705D /* GMSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		561EEDA6275466200042705D /* GmAsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 561EEDA4275466200042705D /* GmAsyncSocket.h */; };
+		561EEDA7275466200042705D /* GmAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 561EEDA5275466200042705D /* GmAsyncSocket.m */; };
+		561EEDB02754A2FC0042705D /* TcpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 561EEDAE2754A2FC0042705D /* TcpSocket.h */; };
+		561EEDB12754A2FC0042705D /* TcpSocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 561EEDAF2754A2FC0042705D /* TcpSocket.c */; };
+		561EEDB42754A85C0042705D /* GMSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 561EEDB22754A85C0042705D /* GMSocket.h */; };
+		561EEDB52754A85C0042705D /* GMSocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 561EEDB32754A85C0042705D /* GMSocket.c */; };
+		561EEDBC2754D0820042705D /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 561EEDBA2754D0820042705D /* libcrypto.a */; };
+		561EEDBD2754D0820042705D /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 561EEDBB2754D0820042705D /* libssl.a */; };
+		561EEDF62754DB6E0042705D /* KququEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 561EEDF42754DB6E0042705D /* KququEvent.h */; };
+		561EEDF72754DB6E0042705D /* KququEvent.c in Sources */ = {isa = PBXBuildFile; fileRef = 561EEDF52754DB6E0042705D /* KququEvent.c */; };
+		56D8C2AF27589A8400704300 /* ring_buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 56D8C2AD27589A8400704300 /* ring_buffer.h */; };
+		56D8C2B027589A8400704300 /* ring_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 56D8C2AE27589A8400704300 /* ring_buffer.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		561EED94275465A90042705D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 561EED80275465A80042705D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 561EED88275465A80042705D;
+			remoteInfo = GMSDK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		561EED89275465A80042705D /* GMSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GMSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		561EED8C275465A80042705D /* GMSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMSDK.h; sourceTree = "<group>"; };
+		561EED8D275465A80042705D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		561EED92275465A90042705D /* GMSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GMSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		561EED97275465A90042705D /* GMSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMSDKTests.m; sourceTree = "<group>"; };
+		561EED99275465A90042705D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		561EEDA4275466200042705D /* GmAsyncSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GmAsyncSocket.h; sourceTree = "<group>"; };
+		561EEDA5275466200042705D /* GmAsyncSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GmAsyncSocket.m; sourceTree = "<group>"; };
+		561EEDAE2754A2FC0042705D /* TcpSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TcpSocket.h; sourceTree = "<group>"; };
+		561EEDAF2754A2FC0042705D /* TcpSocket.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = TcpSocket.c; sourceTree = "<group>"; };
+		561EEDB22754A85C0042705D /* GMSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMSocket.h; sourceTree = "<group>"; };
+		561EEDB32754A85C0042705D /* GMSocket.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = GMSocket.c; sourceTree = "<group>"; };
+		561EEDBA2754D0820042705D /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = GMSDK/gmssl/lib/libcrypto.a; sourceTree = SOURCE_ROOT; };
+		561EEDBB2754D0820042705D /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = GMSDK/gmssl/lib/libssl.a; sourceTree = SOURCE_ROOT; };
+		561EEDF42754DB6E0042705D /* KququEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KququEvent.h; sourceTree = "<group>"; };
+		561EEDF52754DB6E0042705D /* KququEvent.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = KququEvent.c; sourceTree = "<group>"; };
+		56D8C2AD27589A8400704300 /* ring_buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ring_buffer.h; sourceTree = "<group>"; };
+		56D8C2AE27589A8400704300 /* ring_buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ring_buffer.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		561EED86275465A80042705D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				561EEDBD2754D0820042705D /* libssl.a in Frameworks */,
+				561EEDBC2754D0820042705D /* libcrypto.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		561EED8F275465A90042705D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				561EED93275465A90042705D /* GMSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		561EED7F275465A80042705D = {
+			isa = PBXGroup;
+			children = (
+				561EED8B275465A80042705D /* GMSDK */,
+				561EED96275465A90042705D /* GMSDKTests */,
+				561EED8A275465A80042705D /* Products */,
+				561EEDAA27546F5E0042705D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		561EED8A275465A80042705D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				561EED89275465A80042705D /* GMSDK.framework */,
+				561EED92275465A90042705D /* GMSDKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		561EED8B275465A80042705D /* GMSDK */ = {
+			isa = PBXGroup;
+			children = (
+				561EEDA3275465E30042705D /* gmssl */,
+				561EED8C275465A80042705D /* GMSDK.h */,
+				561EED8D275465A80042705D /* Info.plist */,
+			);
+			path = GMSDK;
+			sourceTree = "<group>";
+		};
+		561EED96275465A90042705D /* GMSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				561EED97275465A90042705D /* GMSDKTests.m */,
+				561EED99275465A90042705D /* Info.plist */,
+			);
+			path = GMSDKTests;
+			sourceTree = "<group>";
+		};
+		561EEDA3275465E30042705D /* gmssl */ = {
+			isa = PBXGroup;
+			children = (
+				561EEDAD2754A2D40042705D /* TcpSocket */,
+				561EEDA4275466200042705D /* GmAsyncSocket.h */,
+				561EEDA5275466200042705D /* GmAsyncSocket.m */,
+			);
+			path = gmssl;
+			sourceTree = "<group>";
+		};
+		561EEDAA27546F5E0042705D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		561EEDAD2754A2D40042705D /* TcpSocket */ = {
+			isa = PBXGroup;
+			children = (
+				56D8C2AE27589A8400704300 /* ring_buffer.c */,
+				56D8C2AD27589A8400704300 /* ring_buffer.h */,
+				561EEDBA2754D0820042705D /* libcrypto.a */,
+				561EEDBB2754D0820042705D /* libssl.a */,
+				561EEDAE2754A2FC0042705D /* TcpSocket.h */,
+				561EEDAF2754A2FC0042705D /* TcpSocket.c */,
+				561EEDB22754A85C0042705D /* GMSocket.h */,
+				561EEDB32754A85C0042705D /* GMSocket.c */,
+				561EEDF42754DB6E0042705D /* KququEvent.h */,
+				561EEDF52754DB6E0042705D /* KququEvent.c */,
+			);
+			path = TcpSocket;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		561EED84275465A80042705D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				561EEDF62754DB6E0042705D /* KququEvent.h in Headers */,
+				561EEDB02754A2FC0042705D /* TcpSocket.h in Headers */,
+				561EEDB42754A85C0042705D /* GMSocket.h in Headers */,
+				561EEDA6275466200042705D /* GmAsyncSocket.h in Headers */,
+				56D8C2AF27589A8400704300 /* ring_buffer.h in Headers */,
+				561EED9A275465A90042705D /* GMSDK.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		561EED88275465A80042705D /* GMSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 561EED9D275465A90042705D /* Build configuration list for PBXNativeTarget "GMSDK" */;
+			buildPhases = (
+				561EED84275465A80042705D /* Headers */,
+				561EED85275465A80042705D /* Sources */,
+				561EED86275465A80042705D /* Frameworks */,
+				561EED87275465A80042705D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GMSDK;
+			productName = GMSDK;
+			productReference = 561EED89275465A80042705D /* GMSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		561EED91275465A90042705D /* GMSDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 561EEDA0275465A90042705D /* Build configuration list for PBXNativeTarget "GMSDKTests" */;
+			buildPhases = (
+				561EED8E275465A90042705D /* Sources */,
+				561EED8F275465A90042705D /* Frameworks */,
+				561EED90275465A90042705D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				561EED95275465A90042705D /* PBXTargetDependency */,
+			);
+			name = GMSDKTests;
+			productName = GMSDKTests;
+			productReference = 561EED92275465A90042705D /* GMSDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		561EED80275465A80042705D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					561EED88275465A80042705D = {
+						CreatedOnToolsVersion = 12.5.1;
+						LastSwiftMigration = 1250;
+					};
+					561EED91275465A90042705D = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+				};
+			};
+			buildConfigurationList = 561EED83275465A80042705D /* Build configuration list for PBXProject "GMSDK" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 561EED7F275465A80042705D;
+			productRefGroup = 561EED8A275465A80042705D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				561EED88275465A80042705D /* GMSDK */,
+				561EED91275465A90042705D /* GMSDKTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		561EED87275465A80042705D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		561EED90275465A90042705D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		561EED85275465A80042705D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				561EEDB12754A2FC0042705D /* TcpSocket.c in Sources */,
+				561EEDA7275466200042705D /* GmAsyncSocket.m in Sources */,
+				56D8C2B027589A8400704300 /* ring_buffer.c in Sources */,
+				561EEDF72754DB6E0042705D /* KququEvent.c in Sources */,
+				561EEDB52754A85C0042705D /* GMSocket.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		561EED8E275465A90042705D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				561EED98275465A90042705D /* GMSDKTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		561EED95275465A90042705D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 561EED88275465A80042705D /* GMSDK */;
+			targetProxy = 561EED94275465A90042705D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		561EED9B275465A90042705D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = Intel;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		561EED9C275465A90042705D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = Intel;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		561EED9E275465A90042705D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3J6CZJN6VH;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = /Users/yuhan/Desktop/GMSDK/GMSDK/gmssl/include;
+				INFOPLIST_FILE = GMSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GMSDK/gmssl/lib",
+				);
+				MARKETING_VERSION = 0.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lib.datathk.GMSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		561EED9F275465A90042705D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3J6CZJN6VH;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = /Users/yuhan/Desktop/GMSDK/GMSDK/gmssl/include;
+				INFOPLIST_FILE = GMSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GMSDK/gmssl/lib",
+				);
+				MARKETING_VERSION = 0.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lib.datathk.GMSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		561EEDA1275465A90042705D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 3J6CZJN6VH;
+				INFOPLIST_FILE = GMSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lib.datathk.GMSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		561EEDA2275465A90042705D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 3J6CZJN6VH;
+				INFOPLIST_FILE = GMSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lib.datathk.GMSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		561EED83275465A80042705D /* Build configuration list for PBXProject "GMSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				561EED9B275465A90042705D /* Debug */,
+				561EED9C275465A90042705D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		561EED9D275465A90042705D /* Build configuration list for PBXNativeTarget "GMSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				561EED9E275465A90042705D /* Debug */,
+				561EED9F275465A90042705D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		561EEDA0275465A90042705D /* Build configuration list for PBXNativeTarget "GMSDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				561EEDA1275465A90042705D /* Debug */,
+				561EEDA2275465A90042705D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 561EED80275465A80042705D /* Project object */;
+}
