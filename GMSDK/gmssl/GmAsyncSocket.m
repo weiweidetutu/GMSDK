@@ -12,6 +12,8 @@
 #include <openssl/ssl.h>
 #import "GmAsyncSocket.h"
 #include "ring_buffer.h"
+#define RING_BUFFER_SUCCESS     0x01
+#define RING_BUFFER_ERROR       0x00
 #define ErrorDomain @"GmAsyncSocketErrorDomain"
 @interface GmAsyncSocket()
 //SSL数据接收数组
@@ -28,6 +30,8 @@
 @property(nonatomic)  SSL_CTX * ctx;
 @property(nonatomic)   struct kevent *changes;
 @property(nonatomic)   struct kevent *events;
+@property(nonatomic) NSMutableArray *tempReadArray;
+@property(nonatomic) NSArray *readArray;
 @property(nonatomic) Boolean status;
 @property(nonatomic) ring_buffer* RB ;
 @property(nonatomic) ring_buffer* WB ;
@@ -35,6 +39,12 @@
 
 @implementation GmAsyncSocket
 // 执行对象初始化工作
+-(NSMutableArray*)tempReadArray{
+    if (!_tempReadArray) {
+        _tempReadArray = [[NSMutableArray alloc] init];
+    }
+    return _tempReadArray;
+}
 -(instancetype)init{
     GmAsyncSocket * gmAsyncSocket =  [super init];
     gmAsyncSocket.gmAsyncSocket = self;
@@ -46,6 +56,7 @@
     //初始化ip结构体
     gmAsyncSocket.ip4 = (struct sockaddr_in*)malloc(sizeof(struct sockaddr_in));
     gmAsyncSocket.ip6 = (struct sockaddr_in6*)malloc(sizeof(struct sockaddr_in6));
+ 
     memset(self.ip6, 0, sizeof(struct sockaddr_in6));
     memset(self.ip4, 0, sizeof(struct sockaddr_in));
     //初始化缓冲区
@@ -72,7 +83,7 @@
 /*
  获取IP地址
  **/
-- (NSString *)getIPWithHostName:(const NSString*)hostName{
+- (NSString *)getIPWithHostName:(NSString*)hostName{
     const char *hostN= [hostName UTF8String];
     struct hostent* phot;
     @try {
@@ -90,14 +101,22 @@
             struct in_addr ip_addr;
             memcpy(&ip_addr, phot->h_addr, sizeof(ip_addr));
             char ip[20] = {0};
-            return [NSString stringWithUTF8String:inet_ntop(AF_INET, &ip_addr, ip, sizeof(ip_addr))];
+            const char * output = inet_ntop(AF_INET, &ip_addr, ip, 20);
+            if (output == NULL) {
+                return NULL;
+            }
+            return [[NSString alloc] initWithBytes:ip length:sizeof(ip) encoding:NSUTF8StringEncoding];
             break;
         }
         case AF_INET6:{
             struct in6_addr ip_addr;
             memcpy(&ip_addr, phot->h_addr, 4);
             char ip[1024] = {0};
-            return [NSString stringWithUTF8String:inet_ntop(AF_INET, &ip_addr, ip, sizeof(ip_addr))];
+            const char * output = inet_ntop(AF_INET6, &ip_addr, ip, 1024);
+            if (output == NULL) {
+                return NULL;
+            }
+            return [[NSString alloc] initWithBytes:ip length:sizeof(ip) encoding:NSUTF8StringEncoding];
             break;
         }
         default:
@@ -110,42 +129,45 @@
  地址转换判断
  ！=1
  **/
--(int)translateIPV6ADDR:(NSString *)ipStr ip6Addr:(struct sockaddr_in6)servaddr6{
-    return inet_pton(AF_INET6,[ipStr UTF8String],&servaddr6.sin6_addr);
+-(int)translateIPV6ADDR:(NSString *)ipStr ip6Addr:(struct sockaddr_in6 *)servaddr6{
+    return inet_pton(AF_INET6,[ipStr UTF8String],&servaddr6->sin6_addr);
 }
 /*
  地址转换判断
  ！=1
  **/
--(int)translateIPV4ADDR:(NSString *)ipStr ip4Addr:(struct sockaddr_in)servaddr4{
-    return inet_pton(AF_INET, [ipStr UTF8String], &servaddr4);
+-(int)translateIPV4ADDR:(NSString *)ipStr ip4Addr:(struct sockaddr_in*)servaddr4{
+    return inet_pton(AF_INET, [ipStr UTF8String], &servaddr4->sin_addr.s_addr);
 }
--(void)connectTo:(NSString*)host port:(int)port ca:(NSString*)ca cert:(NSString*)cert key:(NSString*)key bufferSize:(int)size{
+-(void)connectTo:(NSString*)host port:(uint16)port ca:(NSString*)ca cert:(NSString*)cert key:(NSString*)key bufferSize:(int)size{
+    memset(self.ip4, 0, sizeof(struct sockaddr_in));
+    memset(self.ip6, 0, sizeof(struct sockaddr_in6));
     NSString * decodeHost = [self getIPWithHostName:host];
-    if(decodeHost == nil){
-        if([self translateIPV4ADDR:host ip4Addr:*self.ip4]==1){
+    if(decodeHost == nil||[decodeHost isEqual:@""]){
+        if([self translateIPV4ADDR:host ip4Addr:self.ip4]){
             self.isIPV6 = NO;
         }else{
-            if ([self translateIPV6ADDR:host ip6Addr:*self.ip6]) {
+            if ([self translateIPV6ADDR:host ip6Addr:self.ip6]) {
                 self.isIPV6 = YES;
             }else{
+                
                 [self errorWith:[[NSError alloc] initWithDomain:ErrorDomain code:-1001 userInfo:@{
                     @"errMsg":@"Can not Translate the Host String",
-                    @"错误信息":@"无法解析主机"
+                    @"错误信息":[NSString stringWithFormat: @"不是域名无法解析主机 :%@-decode:%@",host,decodeHost]
                 }]];
                 return;
             }
         }
     }else{
-        if([self translateIPV4ADDR:decodeHost ip4Addr:*self.ip4]==1){
+        if([self translateIPV4ADDR:decodeHost ip4Addr:self.ip4]){
             self.isIPV6 = NO;
         }else{
-            if ([self translateIPV6ADDR:decodeHost ip6Addr:*self.ip6]) {
+            if ([self translateIPV6ADDR:decodeHost ip6Addr:self.ip6]) {
                 self.isIPV6 = YES;
             }else{
                 [self errorWith:[[NSError alloc] initWithDomain:ErrorDomain code:-1001 userInfo:@{
                     @"errMsg":@"Can not Translate the Host String",
-                    @"错误信息":@"无法解析主机"
+                    @"错误信息":[NSString stringWithFormat: @"无法解析主机 :%@-decode:%@",host,decodeHost]
                 }]];
                 return;
             }
@@ -154,12 +176,12 @@
     if (self.isIPV6) {
         //建立ipv6 Socket 连接
         self.ip6->sin6_family = AF_INET6;
-        self.ip6->sin6_port = port;
+        self.ip6->sin6_port = htons((unsigned short)port);
         int sock = Yh_GetClientFd(AF_INET6);
         if(Yh_ConnectSocket((const struct sockaddr *)self.ip6, sock)<0){
             [self errorWith:[NSError errorWithDomain:ErrorDomain code:-1002 userInfo:@{
                 @"errMsg":@"Can Not Connect Tcp",
-                @"错误信息":@"Tcp 连接失败"
+                @"错误信息":[NSString stringWithFormat:@"Tcp 连接失败%@:%d",[NSData dataWithBytes:(char *)&self.ip6->sin6_addr length:sizeof(self.ip6->sin6_addr)],self.ip6->sin6_port]
             }]];
             return;
         }
@@ -196,8 +218,8 @@
         self.status = YES;
         int kq = Yh_Kqeue(sock, self.changes);
         //初始化读写缓冲区
-        uint8_t bufferR[size] ;
-        uint8_t bufferW[size] ;
+        uint8_t bufferR[size*1024] ;
+        uint8_t bufferW[size*1024] ;
         ring_buffer RB ;
         ring_buffer WB ;
         Ring_Buffer_Init(&RB, bufferR, size);
@@ -207,7 +229,7 @@
         __weak typeof(self) weakSelf = self;
         dispatch_async(self.mainLoopQueue, ^{
             while (weakSelf.status) {
-                if(Yh_KqueueOnceLoop(kq, weakSelf.events, weakSelf.ssl,weakSelf.RB,weakSelf.WB)<0)
+                if(Yh_KqueueOnceLoop(kq, weakSelf.events, weakSelf.ssl,weakSelf.RB,weakSelf.WB,dataInput,(__bridge void *)(self))<0)
                     weakSelf.status = NO;
             }
         });
@@ -215,13 +237,14 @@
         
     }else{
         //建立ipv4 Socket 连接
-        self.ip6->sin6_family = AF_INET;
-        self.ip6->sin6_port = port;
+        self.ip4->sin_family = AF_INET;
+        self.ip4->sin_port = htons((unsigned short)port);
         int sock = Yh_GetClientFd(AF_INET);
-        if(Yh_ConnectSocket((const struct sockaddr *)self.ip4, sock)<0){
+        int err = Yh_ConnectSocket((const struct sockaddr *)self.ip4, sock);
+        if(err<0){
             [self errorWith:[NSError errorWithDomain:ErrorDomain code:-1002 userInfo:@{
                 @"errMsg":@"Can Not Connect Tcp",
-                @"错误信息":@"Tcp 连接失败"
+                @"错误信息":[NSString stringWithFormat:@"Tcp 连接失败%@:%d--错误代码%d",[NSData dataWithBytes:(char *)&self.ip4->sin_addr.s_addr length:sizeof(self.ip4->sin_addr.s_addr)],self.ip4->sin_port,err]
             }]];
             return;
         }
@@ -271,12 +294,55 @@
         __weak typeof(self) weakSelf = self;
         dispatch_async(self.mainLoopQueue, ^{
             while (weakSelf.status) {
-                if(Yh_KqueueOnceLoop(kq, weakSelf.events, weakSelf.ssl,weakSelf.RB,weakSelf.WB)<0)
+                if(Yh_KqueueOnceLoop(kq, weakSelf.events, weakSelf.ssl,weakSelf.RB,weakSelf.WB,dataInput,(__bridge void *)(self))<0)
                     weakSelf.status = NO;
             }
         });
         Yh_CloseSSL(sock, self.ssl, self.ctx);
         
+    }
+}
+void dataInput(void *Self){
+    printf("收到GMSSL返回的数据");
+    GmAsyncSocket *gm = (__bridge GmAsyncSocket *)Self;
+    dispatch_sync(gm.notifiQueue, ^{
+        NSString * string = gm.tempReadArray[0];
+        NSArray *arr = [string componentsSeparatedByString:@","];
+        if(Ring_Buffer_Get_Lenght(gm.RB)>=[arr[0] intValue]){
+            UInt8 buf[[arr[0] intValue]];
+            if(Ring_Buffer_Read_String(gm.RB, buf, [arr[0] intValue])==RING_BUFFER_SUCCESS){
+                [gm didReadDataWithData:[[NSData alloc]initWithBytes:buf length:[arr[0] intValue]] withTag:[arr[1]intValue]];
+                [gm.tempReadArray removeObjectAtIndex:0];
+            }
+        }
+        
+    });
+    
+}
+-(void)readDataWithLength:(int)length withTag:(int)tag{
+    dispatch_sync(self.notifiQueue, ^{
+    if(Ring_Buffer_Get_Lenght(self.RB)>=length){
+        uint8 buf[length];
+        memset(buf, 0, length);
+        
+        if(RING_BUFFER_SUCCESS == Ring_Buffer_Read_String(self.RB, buf, length)){
+        [self didReadDataWithData:[[NSData alloc]initWithBytes:buf length:length] withTag:tag];
+        }
+    }else{
+            [self.tempReadArray addObject:[NSString stringWithFormat:@"%d,%d",length,tag]];
+    }
+    });
+}
+-(void)writeData:(NSData*)data WithTag:(int)tag{
+    if (Ring_Buffer_Get_FreeSize(self.WB)>data.length) {
+        Ring_Buffer_Write_String(self.WB, (uint8_t *)[data bytes], (uint32_t)[data length]);
+        [self didWriteData:tag err:nil];
+    }else{
+        [self didWriteData:tag err:[NSError errorWithDomain:ErrorDomain code:-1005 userInfo:@{
+            @"errMsg":@"Buf is full",
+            @"错误信息":@"写缓冲区已满"
+        }]];
+       
     }
 }
 
@@ -306,6 +372,19 @@
         }
     }
 }
-
+-(void)didReadDataWithData:(NSData*)data withTag:(int)tag{
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(didReadData:withTag:)]) {
+            [self.delegate didReadData:data withTag:tag];
+        }
+    }
+}
+-(void)didWriteData:(int)Tag err:(NSError*)err{
+    if(self.delegate){
+        if ([self.delegate respondsToSelector:@selector(didWriteDatawithTag:err:)]) {
+            [self.delegate didWriteDatawithTag:Tag err:err];
+        }
+    }
+}
 
 @end

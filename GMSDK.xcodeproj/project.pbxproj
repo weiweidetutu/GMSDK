@@ -10,18 +10,18 @@
 		561EED93275465A90042705D /* GMSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 561EED89275465A80042705D /* GMSDK.framework */; };
 		561EED98275465A90042705D /* GMSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 561EED97275465A90042705D /* GMSDKTests.m */; };
 		561EED9A275465A90042705D /* GMSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 561EED8C275465A80042705D /* GMSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		561EEDA6275466200042705D /* GmAsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 561EEDA4275466200042705D /* GmAsyncSocket.h */; };
+		561EEDA6275466200042705D /* GmAsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 561EEDA4275466200042705D /* GmAsyncSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		561EEDA7275466200042705D /* GmAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 561EEDA5275466200042705D /* GmAsyncSocket.m */; };
-		561EEDB02754A2FC0042705D /* TcpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 561EEDAE2754A2FC0042705D /* TcpSocket.h */; };
+		561EEDB02754A2FC0042705D /* TcpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 561EEDAE2754A2FC0042705D /* TcpSocket.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		561EEDB12754A2FC0042705D /* TcpSocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 561EEDAF2754A2FC0042705D /* TcpSocket.c */; };
-		561EEDB42754A85C0042705D /* GMSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 561EEDB22754A85C0042705D /* GMSocket.h */; };
+		561EEDB42754A85C0042705D /* GMSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 561EEDB22754A85C0042705D /* GMSocket.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		561EEDB52754A85C0042705D /* GMSocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 561EEDB32754A85C0042705D /* GMSocket.c */; };
 		561EEDBC2754D0820042705D /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 561EEDBA2754D0820042705D /* libcrypto.a */; };
 		561EEDBD2754D0820042705D /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 561EEDBB2754D0820042705D /* libssl.a */; };
-		561EEDF62754DB6E0042705D /* KququEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 561EEDF42754DB6E0042705D /* KququEvent.h */; };
+		561EEDF62754DB6E0042705D /* KququEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 561EEDF42754DB6E0042705D /* KququEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		561EEDF72754DB6E0042705D /* KququEvent.c in Sources */ = {isa = PBXBuildFile; fileRef = 561EEDF52754DB6E0042705D /* KququEvent.c */; };
-		56D8C2AF27589A8400704300 /* ring_buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 56D8C2AD27589A8400704300 /* ring_buffer.h */; };
-		56D8C2B027589A8400704300 /* ring_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 56D8C2AE27589A8400704300 /* ring_buffer.c */; };
+		56D8C2AF27589A8400704300 /* ring_buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 56D8C2AD27589A8400704300 /* ring_buffer.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		56D8C2B027589A8400704300 /* ring_buffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D8C2AE27589A8400704300 /* ring_buffer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +52,7 @@
 		561EEDF42754DB6E0042705D /* KququEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KququEvent.h; sourceTree = "<group>"; };
 		561EEDF52754DB6E0042705D /* KququEvent.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = KququEvent.c; sourceTree = "<group>"; };
 		56D8C2AD27589A8400704300 /* ring_buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ring_buffer.h; sourceTree = "<group>"; };
-		56D8C2AE27589A8400704300 /* ring_buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ring_buffer.c; sourceTree = "<group>"; };
+		56D8C2AE27589A8400704300 /* ring_buffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ring_buffer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +134,7 @@
 		561EEDAD2754A2D40042705D /* TcpSocket */ = {
 			isa = PBXGroup;
 			children = (
-				56D8C2AE27589A8400704300 /* ring_buffer.c */,
+				56D8C2AE27589A8400704300 /* ring_buffer.m */,
 				56D8C2AD27589A8400704300 /* ring_buffer.h */,
 				561EEDBA2754D0820042705D /* libcrypto.a */,
 				561EEDBB2754D0820042705D /* libssl.a */,
@@ -155,10 +155,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				561EEDA6275466200042705D /* GmAsyncSocket.h in Headers */,
 				561EEDF62754DB6E0042705D /* KququEvent.h in Headers */,
 				561EEDB02754A2FC0042705D /* TcpSocket.h in Headers */,
 				561EEDB42754A85C0042705D /* GMSocket.h in Headers */,
-				561EEDA6275466200042705D /* GmAsyncSocket.h in Headers */,
 				56D8C2AF27589A8400704300 /* ring_buffer.h in Headers */,
 				561EED9A275465A90042705D /* GMSDK.h in Headers */,
 			);
@@ -263,7 +263,7 @@
 			files = (
 				561EEDB12754A2FC0042705D /* TcpSocket.c in Sources */,
 				561EEDA7275466200042705D /* GmAsyncSocket.m in Sources */,
-				56D8C2B027589A8400704300 /* ring_buffer.c in Sources */,
+				56D8C2B027589A8400704300 /* ring_buffer.m in Sources */,
 				561EEDF72754DB6E0042705D /* KququEvent.c in Sources */,
 				561EEDB52754A85C0042705D /* GMSocket.c in Sources */,
 			);
@@ -475,6 +475,7 @@
 		561EEDA1275465A90042705D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3J6CZJN6VH;
@@ -492,6 +493,7 @@
 		561EEDA2275465A90042705D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3J6CZJN6VH;

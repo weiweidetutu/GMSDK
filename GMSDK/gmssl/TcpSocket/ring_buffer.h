@@ -36,5 +36,6 @@ uint32_t Ring_Buffer_Find_Keyword(ring_buffer *ring_buffer_handle, uint32_t keyw
 static uint32_t Ring_Buffer_Get_Word(ring_buffer *ring_buffer_handle, uint32_t head, uint32_t read_lenght);//从指定头指针地址获取完整长度的关键词（私有函数，无指针越位保护）
 uint32_t Ring_Buffer_Get_Lenght(ring_buffer *ring_buffer_handle);//获取缓冲区里已储存的数据长度
 uint32_t Ring_Buffer_Get_FreeSize(ring_buffer *ring_buffer_handle);//获取缓冲区可用储存空间
+uint8_t Ring_Buffer_Write_String_Block(ring_buffer *ring_buffer_handle, uint8_t *input_addr, uint32_t write_lenght,void *p,void* Self);//通知缓冲区写入数据
 
 #endif

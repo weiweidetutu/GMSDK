@@ -19,7 +19,7 @@
 */
 
 #include "ring_buffer.h"
-
+typedef void (*nfun)(void *Self);
 /**
  * \brief 初始化新缓冲区
  * \param[out] ring_buffer_handle: 待初始化的缓冲区结构体句柄
@@ -171,6 +171,7 @@ uint8_t Ring_Buffer_Write_String(ring_buffer *ring_buffer_handle, uint8_t *input
 */
 uint8_t Ring_Buffer_Read_String(ring_buffer *ring_buffer_handle, uint8_t *output_addr, uint32_t read_lenght)
 {
+    
     if(read_lenght > ring_buffer_handle->lenght)
         return RING_BUFFER_ERROR ;
     else
@@ -301,4 +302,50 @@ uint32_t Ring_Buffer_Get_Lenght(ring_buffer *ring_buffer_handle)
 uint32_t Ring_Buffer_Get_FreeSize(ring_buffer *ring_buffer_handle)
 {
     return (ring_buffer_handle->max_lenght - ring_buffer_handle->lenght) ;
+}
+
+
+uint8_t Ring_Buffer_Write_String_Block(ring_buffer *ring_buffer_handle, uint8_t *input_addr, uint32_t write_lenght,void *p,void *Self)
+{
+    //如果不够存储空间存放新数据,返回错误
+    if((ring_buffer_handle->lenght + write_lenght) > (ring_buffer_handle->max_lenght))
+        return RING_BUFFER_ERROR ;
+    else
+    {
+        //设置两次写入长度
+        uint32_t write_size_a, write_size_b ;
+        //如果顺序可用长度小于需写入的长度，需要将数据拆成两次分别写入
+        if((ring_buffer_handle->max_lenght - ring_buffer_handle->tail) < write_lenght)
+        {
+            write_size_a = ring_buffer_handle->max_lenght - ring_buffer_handle->tail ;//从尾指针开始写到储存数组末尾
+            write_size_b = write_lenght - write_size_a ;//从储存数组开头写数据
+        }
+        else//如果顺序可用长度大于或等于需写入的长度，则只需要写入一次
+        {
+            write_size_a = write_lenght ;//从尾指针开始写到储存数组末尾
+            write_size_b = 0 ;//无需从储存数组开头写数据
+        }
+        //开始写入数据
+        if(write_size_b != 0)//需要写入两次
+        {
+            //分别拷贝a、b段数据到储存数组中
+            memcpy(ring_buffer_handle->array_addr + ring_buffer_handle->tail, input_addr, write_size_a);
+            memcpy(ring_buffer_handle->array_addr, input_addr + write_size_a, write_size_b);
+            ring_buffer_handle->lenght += write_lenght ;//记录新存储了多少数据量
+            ring_buffer_handle->tail = write_size_b ;//重新定位尾指针位置
+        }
+        else//只需写入一次
+        {
+            memcpy(ring_buffer_handle->array_addr + ring_buffer_handle->tail, input_addr, write_size_a);
+            ring_buffer_handle->lenght += write_lenght ;//记录新存储了多少数据量
+            ring_buffer_handle->tail += write_size_a ;//重新定位尾指针位置
+            if(ring_buffer_handle->tail == ring_buffer_handle->max_lenght)
+                ring_buffer_handle->tail = 0 ;//如果写入数据后尾指针刚好写到数组尾部，则回到开头，防止越位
+        }
+        if(NULL != p){
+            nfun n = p;
+            n(Self);
+        }
+        return RING_BUFFER_SUCCESS ;
+    }
 }

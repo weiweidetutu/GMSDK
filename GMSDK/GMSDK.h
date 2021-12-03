@@ -2,7 +2,7 @@
 //  GMSDK.h
 //  GMSDK
 //
-//  Created by yuhan on 2021/11/29.
+//  Created by 葳葳的涂涂 on 2021/12/31.
 //
 
 #import <Foundation/Foundation.h>
@@ -14,5 +14,4 @@ FOUNDATION_EXPORT double GMSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char GMSDKVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <GMSDK/PublicHeader.h>
-#import "GmAsyncSocket.h"
-#include "GMSocket.h"
+#import <GMSDK/GmAsyncSocket.h>

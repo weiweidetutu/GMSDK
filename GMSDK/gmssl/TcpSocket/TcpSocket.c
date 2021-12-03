@@ -16,12 +16,8 @@ int Yh_GetClientFd(int ip_type){
  连接Socket
  **/
 int Yh_ConnectSocket(const struct sockaddr * addr,int sock_cli){
-    if(connect(sock_cli, addr, sizeof(addr))<0){
-        return -1;
-    }else{
-        return 0;
-    }
-        
+    return connect(sock_cli, addr, sizeof(*addr));
+    
 }
 /*
 关闭Socket

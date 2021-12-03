@@ -11,5 +11,5 @@
 #include <stdio.h>
 #include <ring_buffer.h>
 int Yh_Kqeue(int fd,struct kevent *change_event);
-int Yh_KqueueOnceLoop(int kq,struct kevent *event,SSL *ssl,ring_buffer *Read, ring_buffer *Write);
+int Yh_KqueueOnceLoop(int kq,struct kevent *event,SSL *ssl,ring_buffer *Read, ring_buffer *Write,void * notfi,void * Self);
 #endif /* KququEvent_h */
