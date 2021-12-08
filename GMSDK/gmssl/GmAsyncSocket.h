@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GmAsyncSocket : NSObject
 @property(nonatomic,weak) id<GmAsyncSocketDelegate> delegate;
 
--(void)connectTo:(NSString*)host port:(uint16)port ca:(NSString*)ca cert:(NSString*)cert key:(NSString*)key bufferSize:(int)size;
+-(void)connectTo:(NSString*)host port:(uint16)port ca:(NSString*)ca signcert:(NSString*)signCert signkey:(NSString*)signKey codercert:(NSString*)coderCert coderKey:(NSString*)coderKey bufferSize:(int)size;
 -(void)readDataWithLength:(int)length withTag:(int)tag;
 -(void)writeData:(NSData*)data WithTag:(int)tag;
 @end

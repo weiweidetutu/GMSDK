@@ -139,7 +139,7 @@
 -(int)translateIPV4ADDR:(NSString *)ipStr ip4Addr:(struct sockaddr_in*)servaddr4{
     return inet_pton(AF_INET, [ipStr UTF8String], &servaddr4->sin_addr.s_addr);
 }
--(void)connectTo:(NSString*)host port:(uint16)port ca:(NSString*)ca cert:(NSString*)cert key:(NSString*)key bufferSize:(int)size{
+-(void)connectTo:(NSString*)host port:(uint16)port ca:(NSString*)ca signcert:(NSString*)signCert signkey:(NSString*)signKey codercert:(NSString*)coderCert coderKey:(NSString*)coderKey bufferSize:(int)size{
     memset(self.ip4, 0, sizeof(struct sockaddr_in));
     memset(self.ip6, 0, sizeof(struct sockaddr_in6));
     NSString * decodeHost = [self getIPWithHostName:host];
@@ -200,21 +200,31 @@
             }]];
             return;
         }
-        if(Yh_LoadUserCert(self.ctx, (char *)[cert UTF8String], (char *)[key UTF8String])<0){
+        int err = Yh_LoadUserCert(self.ctx, (char *)[signCert UTF8String], (char *)[signKey UTF8String]);
+        if(err<0){
             [self errorWith:[NSError errorWithDomain:ErrorDomain code:-1004 userInfo:@{
                 @"errMsg":@"Load Client Cert Error",
-                @"错误信息":@"加载客户端证书失败"
+                @"错误信息":[NSString stringWithFormat:@"加载客户端签名证书失败%d",err]
+            }]];
+            return;
+        }
+        int certerr = Yh_LoadUserCert(self.ctx, (char *)[coderCert UTF8String], (char *)[coderKey UTF8String]);
+        if(certerr<0){
+            [self errorWith:[NSError errorWithDomain:ErrorDomain code:-1004 userInfo:@{
+                @"errMsg":@"Load Client Cert Error",
+                @"错误信息":[NSString stringWithFormat:@"加载客户端加密证书失败%d",err]
             }]];
             return;
         }
         self.ssl = Yh_NewSSL(sock, self.ctx);
-        if(self.ssl == NULL){
-            [self errorWith:[NSError errorWithDomain:ErrorDomain code:-1004 userInfo:@{
-                @"errMsg":@"Create SSL Error",
-                @"错误信息":@"创建SSL连接失败"
-            }]];
-            return;
-        }
+//        if(self.ssl == NULL){
+//            perror("ssl");
+//            [self errorWith:[NSError errorWithDomain:ErrorDomain code:-1004 userInfo:@{
+//                @"errMsg":@"Create SSL Error",
+//                @"错误信息":@"创建SSL连接失败"
+//            }]];
+//            return;
+//        }
         self.status = YES;
         int kq = Yh_Kqeue(sock, self.changes);
         //初始化读写缓冲区
@@ -263,15 +273,23 @@
             }]];
             return;
         }
-        if(Yh_LoadUserCert(self.ctx, (char *)[cert UTF8String], (char *)[key UTF8String])<0){
+        if(Yh_LoadUserCert(self.ctx, (char *)[signCert UTF8String], (char *)[signKey UTF8String])<0){
             [self errorWith:[NSError errorWithDomain:ErrorDomain code:-1004 userInfo:@{
                 @"errMsg":@"Load Client Cert Error",
-                @"错误信息":@"加载客户端证书失败"
+                @"错误信息":@"加载签名客户端证书失败"
+            }]];
+            return;
+        }
+        if(Yh_LoadUserCert(self.ctx, (char *)[coderCert UTF8String], (char *)[coderKey UTF8String])<0){
+            [self errorWith:[NSError errorWithDomain:ErrorDomain code:-1004 userInfo:@{
+                @"errMsg":@"Load Client Cert Error",
+                @"错误信息":@"加载加密客户端证书失败"
             }]];
             return;
         }
         self.ssl = Yh_NewSSL(sock, self.ctx);
         if(self.ssl == NULL){
+            perror("ssl");
             [self errorWith:[NSError errorWithDomain:ErrorDomain code:-1004 userInfo:@{
                 @"errMsg":@"Create SSL Error",
                 @"错误信息":@"创建SSL连接失败"

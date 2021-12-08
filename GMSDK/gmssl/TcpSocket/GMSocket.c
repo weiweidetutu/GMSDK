@@ -86,7 +86,8 @@ SSL * Yh_NewSSL(int fd,SSL_CTX *ctx){
     SSL*ssl= SSL_new(ctx);
     //设置文件描述符
     SSL_set_fd(ssl, fd);
-    if(SSL_connect(ssl)==-1){
+    if(SSL_connect(ssl)<=0){
+        ERR_print_errors_fp(stderr);
         SSL_shutdown(ssl);
         SSL_free(ssl);
         SSL_CTX_free(ctx);
