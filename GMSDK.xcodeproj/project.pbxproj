@@ -22,6 +22,7 @@
 		561EEDF72754DB6E0042705D /* KququEvent.c in Sources */ = {isa = PBXBuildFile; fileRef = 561EEDF52754DB6E0042705D /* KququEvent.c */; };
 		56D8C2AF27589A8400704300 /* ring_buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 56D8C2AD27589A8400704300 /* ring_buffer.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		56D8C2B027589A8400704300 /* ring_buffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D8C2AE27589A8400704300 /* ring_buffer.m */; };
+		56E08915276AEEB70071C303 /* netty-tcnative-cross_compile_osx.zip in Resources */ = {isa = PBXBuildFile; fileRef = 56E08914276AEEB70071C303 /* netty-tcnative-cross_compile_osx.zip */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		561EEDF52754DB6E0042705D /* KququEvent.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = KququEvent.c; sourceTree = "<group>"; };
 		56D8C2AD27589A8400704300 /* ring_buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ring_buffer.h; sourceTree = "<group>"; };
 		56D8C2AE27589A8400704300 /* ring_buffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ring_buffer.m; sourceTree = "<group>"; };
+		56E08914276AEEB70071C303 /* netty-tcnative-cross_compile_osx.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "netty-tcnative-cross_compile_osx.zip"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 		561EED8B275465A80042705D /* GMSDK */ = {
 			isa = PBXGroup;
 			children = (
+				56E08913276AEEB70071C303 /* java */,
 				561EEDA3275465E30042705D /* gmssl */,
 				561EED8C275465A80042705D /* GMSDK.h */,
 				561EED8D275465A80042705D /* Info.plist */,
@@ -146,6 +149,14 @@
 				561EEDF52754DB6E0042705D /* KququEvent.c */,
 			);
 			path = TcpSocket;
+			sourceTree = "<group>";
+		};
+		56E08913276AEEB70071C303 /* java */ = {
+			isa = PBXGroup;
+			children = (
+				56E08914276AEEB70071C303 /* netty-tcnative-cross_compile_osx.zip */,
+			);
+			path = java;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,6 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56E08915276AEEB70071C303 /* netty-tcnative-cross_compile_osx.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,6 +26,7 @@ void Yh_ShowCerts(SSL * ssl)
     }
     else
     {
+       
         printf("无证书信息！\n");
     }
 }
@@ -49,6 +50,7 @@ SSL_CTX * Yh_CreateGMMethod(void){
   **/
 int Yh_LoadCA(char * ca,SSL_CTX * ctx){
     SSL_CTX_set_verify(ctx,SSL_VERIFY_PEER,NULL);
+    SSL_CTX_use_PrivateKey
     if(SSL_CTX_load_verify_locations(ctx, ca, NULL)<0){
         SSL_CTX_free(ctx);
         return -1;
